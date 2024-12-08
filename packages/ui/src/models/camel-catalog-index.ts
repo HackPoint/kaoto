@@ -14,7 +14,9 @@ export interface CamelCatalogIndex extends Omit<CatalogDefinition, 'catalogs'> {
     languages: CatalogDefinitionEntry;
     dataformats: CatalogDefinitionEntry;
     kamelets: CatalogDefinitionEntry;
+    workflows: CatalogDefinitionEntry;
     kameletBoundaries: CatalogDefinitionEntry;
+    workflowsBoundaries: CatalogDefinitionEntry;
     patterns: CatalogDefinitionEntry;
     entities: CatalogDefinitionEntry;
     loadbalancers: CatalogDefinitionEntry;
@@ -44,4 +46,5 @@ export interface ComponentsCatalog {
   [CatalogKind.Dataformat]?: Record<string, ICamelDataformatDefinition>;
   [CatalogKind.Loadbalancer]?: Record<string, ICamelLoadBalancerDefinition>;
   [CatalogKind.Kamelet]?: Record<string, IKameletDefinition>;
+  [CatalogKind.Workflow]?: Record<string, IKameletDefinition>;
 }

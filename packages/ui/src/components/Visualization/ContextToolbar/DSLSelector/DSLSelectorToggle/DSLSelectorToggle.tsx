@@ -12,9 +12,10 @@ export const DSLSelectorToggle: FunctionComponent<ISourceTypeSelector> = (props)
   const currentFlowType: ISourceSchema = sourceSchemaConfig.config[currentSchemaType];
   const [isOpen, setIsOpen] = useState(false);
   const dslEntriesRef = useRef<Partial<Record<SourceSchemaType, ISourceSchema>>>({
-    [SourceSchemaType.Route]: sourceSchemaConfig.config[SourceSchemaType.Route],
-    [SourceSchemaType.Kamelet]: sourceSchemaConfig.config[SourceSchemaType.Kamelet],
-    [SourceSchemaType.Pipe]: sourceSchemaConfig.config[SourceSchemaType.Pipe],
+    // [SourceSchemaType.Route]: sourceSchemaConfig.config[SourceSchemaType.Route],
+    // [SourceSchemaType.Kamelet]: sourceSchemaConfig.config[SourceSchemaType.Kamelet],
+    [SourceSchemaType.Workflow]: sourceSchemaConfig.config[SourceSchemaType.Workflow],
+    // [SourceSchemaType.Pipe]: sourceSchemaConfig.config[SourceSchemaType.Pipe],
   });
 
   const onSelect = useCallback(

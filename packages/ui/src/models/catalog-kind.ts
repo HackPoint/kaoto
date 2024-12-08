@@ -23,4 +23,6 @@ export const enum CatalogKind {
 
   /** Camel kamelets catalog, f.i. xj-template-action */
   Kamelet = 'kamelet',
+
+  Workflow = 'Workflow',
 }

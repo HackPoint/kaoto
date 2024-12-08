@@ -61,11 +61,21 @@ export const CatalogLoaderProvider: FunctionComponent<PropsWithChildren> = (prop
         const kameletsFiles = CatalogSchemaLoader.fetchFile<ComponentsCatalog[CatalogKind.Kamelet]>(
           `${relativeBasePath}/${catalogIndex.catalogs.kamelets.file}`,
         );
+
         /** Camel Kamelets boundaries definitions list (CRDs) */
         const kameletBoundariesFiles = CatalogSchemaLoader.fetchFile<ComponentsCatalog[CatalogKind.Kamelet]>(
           `${relativeBasePath}/${catalogIndex.catalogs.kameletBoundaries.file}`,
         );
 
+        const workflowsFiles = CatalogSchemaLoader.fetchFile<ComponentsCatalog[CatalogKind.Workflow]>(
+          `${relativeBasePath}/${catalogIndex.catalogs.kamelets.file}`,
+        );
+        console.log( `${relativeBasePath}/${catalogIndex.catalogs.kamelets.file}`);
+        const workflowBoundariesFiles = CatalogSchemaLoader.fetchFile<ComponentsCatalog[CatalogKind.Workflow]>(
+          `${relativeBasePath}/${catalogIndex.catalogs.kameletBoundaries.file}`, //todo: check what's needed to be created
+        );
+
+        console.log(`${relativeBasePath}/${catalogIndex.catalogs.kameletBoundaries.file}`);
         const [
           camelComponents,
           camelModels,
@@ -86,6 +96,8 @@ export const CatalogLoaderProvider: FunctionComponent<PropsWithChildren> = (prop
           camelLoadbalancersFiles,
           kameletsFiles,
           kameletBoundariesFiles,
+          workflowsFiles,
+          workflowBoundariesFiles,
         ]);
 
         CamelCatalogService.setCatalogKey(CatalogKind.Component, camelComponents.body);
@@ -96,6 +108,8 @@ export const CatalogLoaderProvider: FunctionComponent<PropsWithChildren> = (prop
         CamelCatalogService.setCatalogKey(CatalogKind.Dataformat, camelDataformats.body);
         CamelCatalogService.setCatalogKey(CatalogKind.Loadbalancer, camelLoadbalancers.body);
         CamelCatalogService.setCatalogKey(CatalogKind.Kamelet, { ...kameletBoundaries.body, ...kamelets.body });
+        // todo: create workflow files
+        CamelCatalogService.setCatalogKey(CatalogKind.Workflow, { ...kameletBoundaries.body, ...kamelets.body });
       })
       .then(() => {
         setLoadingStatus(LoadingStatus.Loaded);

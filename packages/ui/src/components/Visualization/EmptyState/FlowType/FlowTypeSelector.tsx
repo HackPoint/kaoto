@@ -54,6 +54,8 @@ export const FlowTypeSelector: FunctionComponent<ISourceTypeSelector> = (props) 
         return 'Defines an executable integration flow by declaring a source (starter) and followed by a sequence of actions (or steps). Actions can include data manipulations, EIPs (integration patterns) and internal or external calls.';
       case SourceSchemaType.Kamelet:
         return 'Defines a reusable Camel route as a building block. Kamelets can not be executed on their own, they are used as sources, actions or sinks in Camel Routes or Pipes.';
+      case SourceSchemaType.Workflow:
+        return 'Defines a reusable Workflow route as a building block.';
       case SourceSchemaType.Pipe:
       case SourceSchemaType.KameletBinding:
         return 'Defines a sequence of concatenated Kamelets to form start to finish integration flows. Pipes are a more abstract level of defining integration flows, by chosing and configuring Kamelets.';

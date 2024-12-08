@@ -12,6 +12,7 @@ export interface ISourceSchema {
 interface IEntitySchemaConfig {
   [SourceSchemaType.Route]: ISourceSchema;
   [SourceSchemaType.Kamelet]: ISourceSchema;
+  [SourceSchemaType.Workflow]: ISourceSchema;
   [SourceSchemaType.Pipe]: ISourceSchema;
   [SourceSchemaType.KameletBinding]: ISourceSchema;
   [SourceSchemaType.Integration]: ISourceSchema;
@@ -52,6 +53,13 @@ class SourceSchemaConfig {
       schema: undefined,
       multipleRoute: true,
       description: 'An integration defines a Camel route in a CRD file.',
+    },
+    [SourceSchemaType.Workflow]: {
+      name: 'Workflow',
+      schema: undefined,
+      multipleRoute: false,
+      description:
+        'Defines a reusable Workflow as a building block.',
     },
   };
 
