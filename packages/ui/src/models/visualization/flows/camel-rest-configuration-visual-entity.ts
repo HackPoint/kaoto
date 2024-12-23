@@ -61,11 +61,27 @@ export class CamelRestConfigurationVisualEntity implements BaseVisualCamelEntity
     return 'restConfiguration';
   }
 
+  getNodeTitle(): string {
+    return 'Rest Configuration';
+  }
+
   getTooltipContent(): string {
     return 'restConfiguration';
   }
 
   addStep(): void {
+    return;
+  }
+
+  canDragNode(_path?: string) {
+    return false;
+  }
+
+  canDropOnNode(_path?: string) {
+    return false;
+  }
+
+  moveNodeTo(_options: { draggedNodePath: string; droppedNodePath?: string }) {
     return;
   }
 
@@ -131,7 +147,6 @@ export class CamelRestConfigurationVisualEntity implements BaseVisualCamelEntity
     restConfigurationGroupNode.data.entity = this;
     restConfigurationGroupNode.data.isGroup = true;
     restConfigurationGroupNode.data.icon = NodeIconResolver.getIcon(this.type, NodeIconType.VisualEntity);
-    restConfigurationGroupNode.setTitle('Rest Configuration');
 
     return restConfigurationGroupNode;
   }

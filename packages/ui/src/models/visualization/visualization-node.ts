@@ -1,4 +1,3 @@
-import { getCamelRandomId } from '../../camel-utils/camel-random-id';
 import { DefinedComponent } from '../camel-catalog-index';
 import { NodeLabelType } from '../settings/settings.model';
 import {
@@ -15,10 +14,7 @@ export const createVisualizationNode = <T extends IVisualizationNodeData = IVisu
   id: string,
   data: T,
 ): IVisualizationNode<T> => {
-  const vizNode = new VisualizationNode(getCamelRandomId(id), data);
-  vizNode.setTitle(id);
-
-  return vizNode;
+  return new VisualizationNode(id, data);
 };
 
 /**
@@ -27,7 +23,6 @@ export const createVisualizationNode = <T extends IVisualizationNodeData = IVisu
  * It shouldn't be used directly, but rather through the IVisualizationNode interface.
  */
 class VisualizationNode<T extends IVisualizationNodeData = IVisualizationNodeData> implements IVisualizationNode<T> {
-  private title = '';
   private parentNode: IVisualizationNode | undefined = undefined;
   private previousNode: IVisualizationNode | undefined = undefined;
   private nextNode: IVisualizationNode | undefined = undefined;
@@ -51,16 +46,24 @@ class VisualizationNode<T extends IVisualizationNodeData = IVisualizationNodeDat
     return this.getBaseEntity()?.getTooltipContent(this.data.path) ?? this.id;
   }
 
-  setTitle(title: string): void {
-    this.title = title;
-  }
-
-  getTitle(): string {
-    return this.title;
+  getNodeTitle(): string {
+    return this.getBaseEntity()?.getNodeTitle(this.data.path) ?? this.id;
   }
 
   addBaseEntityStep(definition: DefinedComponent, mode: AddStepMode): void {
     this.getBaseEntity()?.addStep({ definedComponent: definition, mode, data: this.data });
+  }
+
+  canDragNode(): boolean {
+    return this.getBaseEntity()?.canDragNode(this.data.path) ?? false;
+  }
+
+  canDropOnNode(): boolean {
+    return this.getBaseEntity()?.canDropOnNode(this.data.path) ?? false;
+  }
+
+  moveNodeTo(path: string): void {
+    this.getBaseEntity()?.moveNodeTo({ draggedNodePath: path, droppedNodePath: this.data.path });
   }
 
   getNodeInteraction(): NodeInteraction {

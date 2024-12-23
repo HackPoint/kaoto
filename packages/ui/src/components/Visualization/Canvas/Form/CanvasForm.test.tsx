@@ -23,7 +23,6 @@ import {
 import { EntitiesContext, EntitiesProvider } from '../../../../providers/entities.provider';
 import { camelRouteJson, kameletJson } from '../../../../stubs';
 import { getFirstCatalogMap } from '../../../../stubs/test-load-catalog';
-import { ROOT_PATH } from '../../../../utils';
 import { CanvasNode } from '../canvas.models';
 import { FlowService } from '../flow.service';
 import { CanvasForm } from './CanvasForm';
@@ -53,7 +52,7 @@ describe('CanvasForm', () => {
 
   beforeEach(() => {
     camelRouteVisualEntity = new CamelRouteVisualEntity(camelRouteJson);
-    const { nodes } = FlowService.getFlowDiagram(camelRouteVisualEntity.toVizNode());
+    const { nodes } = FlowService.getFlowDiagram('test', camelRouteVisualEntity.toVizNode());
     selectedNode = nodes[2]; // choice
   });
 
@@ -77,7 +76,7 @@ describe('CanvasForm', () => {
 
   it('should render nothing if no schema is available', () => {
     const vizNode = createVisualizationNode('route', {
-      path: ROOT_PATH,
+      path: CamelRouteVisualEntity.ROOT_PATH,
       entity: new CamelRouteVisualEntity(camelRouteJson),
       isGroup: true,
       processorName: 'route',
@@ -113,7 +112,7 @@ describe('CanvasForm', () => {
     };
 
     const vizNode = createVisualizationNode('route', {
-      path: ROOT_PATH,
+      path: CamelRouteVisualEntity.ROOT_PATH,
       entity: new CamelRouteVisualEntity(camelRouteJson),
       isGroup: true,
       processorName: 'route',
@@ -146,7 +145,7 @@ describe('CanvasForm', () => {
     const flowId = camelRouteVisualEntity.id;
     const dispatchSpy = jest.fn();
     const visualFlowsApi = new VisualFlowsApi(dispatchSpy);
-    const { nodes } = FlowService.getFlowDiagram(camelRouteVisualEntity.toVizNode());
+    const { nodes } = FlowService.getFlowDiagram('test', camelRouteVisualEntity.toVizNode());
     selectedNode = nodes[nodes.length - 1];
 
     render(
@@ -183,7 +182,7 @@ describe('CanvasForm', () => {
     const flowId = camelRouteVisualEntity.id;
     const dispatchSpy = jest.fn();
     const visualFlowsApi = new VisualFlowsApi(dispatchSpy);
-    const { nodes } = FlowService.getFlowDiagram(camelRouteVisualEntity.toVizNode());
+    const { nodes } = FlowService.getFlowDiagram('test', camelRouteVisualEntity.toVizNode());
     selectedNode = nodes[nodes.length - 1];
 
     render(
@@ -221,7 +220,7 @@ describe('CanvasForm', () => {
     const newName = 'MyNewId';
     const dispatchSpy = jest.fn();
     const visualFlowsApi = new VisualFlowsApi(dispatchSpy);
-    const { nodes } = FlowService.getFlowDiagram(camelRouteVisualEntity.toVizNode());
+    const { nodes } = FlowService.getFlowDiagram('test', camelRouteVisualEntity.toVizNode());
     selectedNode = nodes[nodes.length - 1];
 
     render(
@@ -261,7 +260,7 @@ describe('CanvasForm', () => {
     const newName = 'MyNewName';
     const dispatchSpy = jest.fn();
     const visualFlowsApi = new VisualFlowsApi(dispatchSpy);
-    const { nodes } = FlowService.getFlowDiagram(kameletVisualEntity.toVizNode());
+    const { nodes } = FlowService.getFlowDiagram('test', kameletVisualEntity.toVizNode());
     selectedNode = nodes[nodes.length - 1];
 
     render(
@@ -293,7 +292,7 @@ describe('CanvasForm', () => {
   describe('should show the User-updated field under the modified tab', () => {
     beforeEach(() => {
       camelRouteVisualEntity = new CamelRouteVisualEntity(camelRouteJson);
-      const { nodes } = FlowService.getFlowDiagram(camelRouteVisualEntity.toVizNode());
+      const { nodes } = FlowService.getFlowDiagram('test', camelRouteVisualEntity.toVizNode());
       selectedNode = nodes[0]; // timer
     });
 
@@ -630,7 +629,7 @@ describe('CanvasForm', () => {
   describe('should show the Required field under the required tab', () => {
     beforeEach(() => {
       camelRouteVisualEntity = new CamelRouteVisualEntity(camelRouteJson);
-      const { nodes } = FlowService.getFlowDiagram(camelRouteVisualEntity.toVizNode());
+      const { nodes } = FlowService.getFlowDiagram('test', camelRouteVisualEntity.toVizNode());
       selectedNode = nodes[0]; // timer
     });
 

@@ -20,9 +20,9 @@ describe('ItemEnableAllSteps', () => {
   });
 
   it('should NOT render an ItemEnableAllSteps if there are not at least 2 or more disabled steps', () => {
-    const camelResource = new CamelRouteResource(camelRouteJson);
+    const camelResource = new CamelRouteResource([camelRouteJson]);
     const visualEntity = camelResource.getVisualEntities()[0];
-    const { nodes, edges } = FlowService.getFlowDiagram(visualEntity.toVizNode());
+    const { nodes, edges } = FlowService.getFlowDiagram('test', visualEntity.toVizNode());
 
     const model: Model = {
       nodes,
@@ -50,9 +50,9 @@ describe('ItemEnableAllSteps', () => {
   });
 
   it('should call updateModel and updateEntitiesFromCamelResource on click', async () => {
-    const camelResource = new CamelRouteResource(camelRouteWithDisabledSteps);
+    const camelResource = new CamelRouteResource([camelRouteWithDisabledSteps]);
     const visualEntity = camelResource.getVisualEntities()[0];
-    const { nodes, edges } = FlowService.getFlowDiagram(visualEntity.toVizNode());
+    const { nodes, edges } = FlowService.getFlowDiagram('test', visualEntity.toVizNode());
 
     const model: Model = {
       nodes,
