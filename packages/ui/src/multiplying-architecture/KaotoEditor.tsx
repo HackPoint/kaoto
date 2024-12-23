@@ -23,6 +23,7 @@ const SCHEMA_TABS: Record<SourceSchemaType, TabList[]> = {
   [SourceSchemaType.Integration]: [],
   [SourceSchemaType.KameletBinding]: [TabList.Design, TabList.Metadata, TabList.ErrorHandler],
   [SourceSchemaType.Pipe]: [TabList.Design, TabList.Metadata, TabList.ErrorHandler],
+  [SourceSchemaType.Workflow]: [TabList.Design, TabList.Metadata, TabList.ErrorHandler],
 };
 
 export const KaotoEditor = () => {

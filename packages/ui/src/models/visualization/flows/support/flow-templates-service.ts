@@ -22,10 +22,7 @@ export class FlowTemplateService {
         return kameletTemplate();
 
       case SourceSchemaType.Workflow:
-        const template = workflowTemplate();
-        console.log('template', template);
-        console.log('template', workflowTemplate());
-        return template;
+        return workflowTemplate();
       default:
         return '';
     }

@@ -2,23 +2,31 @@ import {
   Integration as IntegrationType,
   KameletBinding as KameletBindingType,
   Pipe as PipeType,
+  WorkflowBinding as WorkflowBindingType,
 } from '@kaoto/camel-catalog/types';
 import { TileFilter } from '../../components/Catalog';
 import { createCamelPropertiesSorter } from '../../utils';
-import { IKameletDefinition } from '../kamelets-catalog';
+import { IKameletDefinition, IWorkflowDefinition } from '../kamelets-catalog';
 import { AddStepMode, BaseVisualCamelEntity, IVisualizationNodeData } from '../visualization/base-visual-entity';
 import { MetadataEntity } from '../visualization/metadata';
 import { BaseVisualCamelEntityDefinition, CamelResource } from './camel-resource';
 import { BaseCamelEntity } from './entities';
 import { SourceSchemaType } from './source-schema-type';
 
-export type CamelKType = IntegrationType | IKameletDefinition | KameletBindingType | PipeType;
+export type CamelKType =
+  | IntegrationType
+  | IKameletDefinition
+  | KameletBindingType
+  | PipeType
+  | IWorkflowDefinition
+  | WorkflowBindingType;
 
 export enum CamelKResourceKinds {
   Integration = 'Integration',
   Kamelet = 'Kamelet',
   KameletBinding = 'KameletBinding',
   Pipe = 'Pipe',
+  Workflow = 'Workflow',
 }
 
 export const CAMEL_K_K8S_API_VERSION_V1 = 'camel.apache.org/v1';

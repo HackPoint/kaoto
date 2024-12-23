@@ -5,4 +5,5 @@ export enum SourceSchemaType {
   KameletBinding = 'KameletBinding',
   Pipe = 'Pipe',
   Workflow = 'Workflow',
+  WorkflowBinding = 'WorkflowBinding',
 }

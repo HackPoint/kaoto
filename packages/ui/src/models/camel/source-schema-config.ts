@@ -13,6 +13,7 @@ interface IEntitySchemaConfig {
   [SourceSchemaType.Route]: ISourceSchema;
   [SourceSchemaType.Kamelet]: ISourceSchema;
   [SourceSchemaType.Workflow]: ISourceSchema;
+  [SourceSchemaType.WorkflowBinding]: ISourceSchema;
   [SourceSchemaType.Pipe]: ISourceSchema;
   [SourceSchemaType.KameletBinding]: ISourceSchema;
   [SourceSchemaType.Integration]: ISourceSchema;
@@ -58,8 +59,14 @@ class SourceSchemaConfig {
       name: 'Workflow',
       schema: undefined,
       multipleRoute: false,
+      description: 'Defines a reusable Workflow as a building block.',
+    },
+    [SourceSchemaType.WorkflowBinding]: {
+      name: 'Workflow Binding',
+      schema: undefined,
+      multipleRoute: false,
       description:
-        'Defines a reusable Workflow as a building block.',
+        'Defines a sequence of concatenated Workflow to form start to finish integration flows. Pipes are a more abstract level of defining integration flows, by chosing and configuring Workflows.',
     },
   };
 

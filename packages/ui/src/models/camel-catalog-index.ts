@@ -5,7 +5,7 @@ import { ICamelLanguageDefinition } from './camel-languages-catalog';
 import { ICamelLoadBalancerDefinition } from './camel-loadbalancers-catalog';
 import { ICamelProcessorDefinition } from './camel-processors-catalog';
 import { CatalogKind } from './catalog-kind';
-import { IKameletDefinition } from './kamelets-catalog';
+import { IKameletDefinition, IWorkflowDefinition } from './kamelets-catalog';
 
 export interface CamelCatalogIndex extends Omit<CatalogDefinition, 'catalogs'> {
   catalogs: {
@@ -29,6 +29,7 @@ export type ComponentsCatalogTypes =
   | ICamelLanguageDefinition
   | ICamelDataformatDefinition
   | ICamelLoadBalancerDefinition
+  | IWorkflowDefinition
   | IKameletDefinition;
 export type DefinedComponent = {
   name: string;
@@ -46,5 +47,5 @@ export interface ComponentsCatalog {
   [CatalogKind.Dataformat]?: Record<string, ICamelDataformatDefinition>;
   [CatalogKind.Loadbalancer]?: Record<string, ICamelLoadBalancerDefinition>;
   [CatalogKind.Kamelet]?: Record<string, IKameletDefinition>;
-  [CatalogKind.Workflow]?: Record<string, IKameletDefinition>;
+  [CatalogKind.Workflow]?: Record<string, IWorkflowDefinition>;
 }

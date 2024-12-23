@@ -1,4 +1,4 @@
-import { FromDefinition, Kamelet, ObjectMeta, BeanFactory } from '@kaoto/camel-catalog/types';
+import { FromDefinition, Kamelet, ObjectMeta, BeanFactory, Workflow } from '@kaoto/camel-catalog/types';
 import { SourceSchemaType } from './camel/source-schema-type';
 import { KaotoSchemaDefinition } from './kaoto-schema';
 
@@ -22,10 +22,18 @@ export interface IKameletDefinition extends Omit<Kamelet, 'kind' | 'metadata' | 
   propertiesSchema?: KaotoSchemaDefinition['schema'];
 }
 
+export interface IWorkflowDefinition extends Omit<Workflow, 'kind' | 'metadata' | 'spec'> {
+  kind: SourceSchemaType.Workflow;
+  metadata: IKameletMetadata;
+  spec: IKameletSpec;
+  propertiesSchema?: KaotoSchemaDefinition['schema'];
+}
+
 export interface IKameletMetadata extends ObjectMeta {
   name: string;
   annotations: IKameletMetadataAnnotations;
   labels: IKameletMetadataLabels;
+  [key: string]: unknown;
 }
 
 export interface IKameletMetadataAnnotations {

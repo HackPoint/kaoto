@@ -83,7 +83,7 @@ export class CamelCatalogService {
 
       if (definition) {
         return {
-          catalogKind: CatalogKind.Kamelet,
+          catalogKind: CatalogKind.Workflow,
           definition,
         };
       }

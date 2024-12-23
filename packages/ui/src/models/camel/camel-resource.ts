@@ -4,7 +4,7 @@ import {
   Pipe as PipeType,
 } from '@kaoto/camel-catalog/types';
 import { TileFilter } from '../../components/Catalog';
-import { IKameletDefinition } from '../kamelets-catalog';
+import { IKameletDefinition, IWorkflowDefinition } from '../kamelets-catalog';
 import { AddStepMode, BaseVisualCamelEntity, IVisualizationNodeData } from '../visualization/base-visual-entity';
 import { BeansEntity } from '../visualization/metadata';
 import { RouteTemplateBeansEntity } from '../visualization/metadata/routeTemplateBeansEntity';
@@ -15,6 +15,7 @@ import { KameletBindingResource } from './kamelet-binding-resource';
 import { KameletResource } from './kamelet-resource';
 import { PipeResource } from './pipe-resource';
 import { SourceSchemaType } from './source-schema-type';
+import { WorkflowResource } from './workflow-resource';
 
 export interface CamelResource {
   getVisualEntities(): BaseVisualCamelEntity[];
@@ -88,6 +89,8 @@ function doCreateCamelResource(json?: unknown, type?: SourceSchemaType): CamelRe
       return new KameletBindingResource(json as KameletBindingType);
     case SourceSchemaType.Pipe:
       return new PipeResource(json as PipeType);
+    case SourceSchemaType.Workflow:
+      return new WorkflowResource(json as IWorkflowDefinition);
     default:
       return new CamelRouteResource(json);
   }

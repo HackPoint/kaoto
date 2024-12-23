@@ -5,6 +5,8 @@ export const enum EntityType {
   ErrorHandler = 'errorHandler',
   Integration = 'integration',
   Kamelet = 'kamelet',
+  Workflow = 'Workflow',
+  WorkflowBinding = 'workflowBinding',
   KameletBinding = 'kameletBinding',
   Pipe = 'pipe',
   Rest = 'rest',

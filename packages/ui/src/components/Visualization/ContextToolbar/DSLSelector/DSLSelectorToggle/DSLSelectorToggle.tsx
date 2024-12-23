@@ -1,6 +1,6 @@
 import { MenuToggle, Select, SelectList, SelectOption } from '@patternfly/react-core';
 import { FunctionComponent, MouseEvent, RefObject, useCallback, useContext, useRef, useState } from 'react';
-import { ISourceSchema, SourceSchemaType, sourceSchemaConfig } from '../../../../../models/camel';
+import { ISourceSchema, sourceSchemaConfig, SourceSchemaType } from '../../../../../models/camel';
 import { EntitiesContext } from '../../../../../providers/entities.provider';
 
 interface ISourceTypeSelector {
@@ -9,13 +9,14 @@ interface ISourceTypeSelector {
 
 export const DSLSelectorToggle: FunctionComponent<ISourceTypeSelector> = (props) => {
   const { currentSchemaType } = useContext(EntitiesContext)!;
+  // let currentSchemaType = SourceSchemaType.Workflow;
   const currentFlowType: ISourceSchema = sourceSchemaConfig.config[currentSchemaType];
   const [isOpen, setIsOpen] = useState(false);
   const dslEntriesRef = useRef<Partial<Record<SourceSchemaType, ISourceSchema>>>({
-    // [SourceSchemaType.Route]: sourceSchemaConfig.config[SourceSchemaType.Route],
-    // [SourceSchemaType.Kamelet]: sourceSchemaConfig.config[SourceSchemaType.Kamelet],
+    [SourceSchemaType.Route]: sourceSchemaConfig.config[SourceSchemaType.Route],
+    [SourceSchemaType.Kamelet]: sourceSchemaConfig.config[SourceSchemaType.Kamelet],
     [SourceSchemaType.Workflow]: sourceSchemaConfig.config[SourceSchemaType.Workflow],
-    // [SourceSchemaType.Pipe]: sourceSchemaConfig.config[SourceSchemaType.Pipe],
+    [SourceSchemaType.Pipe]: sourceSchemaConfig.config[SourceSchemaType.Pipe],
   });
 
   const onSelect = useCallback(

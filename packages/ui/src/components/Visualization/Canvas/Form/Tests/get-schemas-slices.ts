@@ -1,8 +1,8 @@
 import {
   ICamelComponentDefinition,
   ICamelProcessorDefinition,
-  IKameletDefinition,
-  KaotoSchemaDefinition,
+  IKameletDefinition, IWorkflowDefinition,
+  KaotoSchemaDefinition
 } from '../../../../../models';
 
 export const getSchemasSlice = (
@@ -10,6 +10,7 @@ export const getSchemasSlice = (
     | Record<string, ICamelComponentDefinition>
     | Record<string, ICamelProcessorDefinition>
     | Record<string, IKameletDefinition>
+    | Record<string, IWorkflowDefinition>
     | undefined,
   range: { start: number; end: number | undefined },
 ): [string, KaotoSchemaDefinition['schema']][] => {

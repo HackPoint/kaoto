@@ -70,12 +70,10 @@ export const CatalogLoaderProvider: FunctionComponent<PropsWithChildren> = (prop
         const workflowsFiles = CatalogSchemaLoader.fetchFile<ComponentsCatalog[CatalogKind.Workflow]>(
           `${relativeBasePath}/${catalogIndex.catalogs.kamelets.file}`,
         );
-        console.log( `${relativeBasePath}/${catalogIndex.catalogs.kamelets.file}`);
         const workflowBoundariesFiles = CatalogSchemaLoader.fetchFile<ComponentsCatalog[CatalogKind.Workflow]>(
           `${relativeBasePath}/${catalogIndex.catalogs.kameletBoundaries.file}`, //todo: check what's needed to be created
         );
 
-        console.log(`${relativeBasePath}/${catalogIndex.catalogs.kameletBoundaries.file}`);
         const [
           camelComponents,
           camelModels,
@@ -86,6 +84,8 @@ export const CatalogLoaderProvider: FunctionComponent<PropsWithChildren> = (prop
           camelLoadbalancers,
           kamelets,
           kameletBoundaries,
+          workflows,
+          workflowsBoundaries,
         ] = await Promise.all([
           camelComponentsFiles,
           camelModelsFiles,
@@ -108,8 +108,7 @@ export const CatalogLoaderProvider: FunctionComponent<PropsWithChildren> = (prop
         CamelCatalogService.setCatalogKey(CatalogKind.Dataformat, camelDataformats.body);
         CamelCatalogService.setCatalogKey(CatalogKind.Loadbalancer, camelLoadbalancers.body);
         CamelCatalogService.setCatalogKey(CatalogKind.Kamelet, { ...kameletBoundaries.body, ...kamelets.body });
-        // todo: create workflow files
-        CamelCatalogService.setCatalogKey(CatalogKind.Workflow, { ...kameletBoundaries.body, ...kamelets.body });
+        CamelCatalogService.setCatalogKey(CatalogKind.Workflow, { ...workflowsBoundaries.body, ...workflows.body });
       })
       .then(() => {
         setLoadingStatus(LoadingStatus.Loaded);

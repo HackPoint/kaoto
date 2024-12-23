@@ -4,7 +4,7 @@ export const workflowTemplate = () => {
   const workflowId = getCamelRandomId('workflow');
 
   return `apiVersion: camel.apache.org/v1
-kind: Kamelet
+kind: Workflow
 metadata:
   name: ${workflowId}
   annotations:
@@ -45,5 +45,6 @@ spec:
           uri: https
           parameters:
             httpUri: random-data-api.com/api/v2/users
-      - to: "workflow:sink"`;
+      - to: "workflow:sink"
+  `;
 };
