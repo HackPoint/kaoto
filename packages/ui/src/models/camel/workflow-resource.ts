@@ -26,8 +26,8 @@ export class WorkflowResource extends CamelKResource implements RouteTemplateBea
     }
 
     this.flow = new WorkflowVisualEntity(this.resource as unknown as IWorkflowDefinition);
-    if (this.flow.workflow.spec.template.beans) {
-      this.beans = new RouteTemplateBeansEntity(this.flow.workflow.spec.template as RouteTemplateBeansParentType);
+    if (this.flow.workflow.spec.routes.beans) {
+      this.beans = new RouteTemplateBeansEntity(this.flow.workflow.spec.routes as RouteTemplateBeansParentType);
     }
   }
 
@@ -62,7 +62,7 @@ export class WorkflowResource extends CamelKResource implements RouteTemplateBea
      * the CamelRouteVisualEntity.
      */
     set(this.resource, 'metadata.name', this.flow.getId());
-    set(this.resource, 'spec.template.from', this.flow.entityDef.template.from);
+    set(this.resource, 'spec.template.from', this.flow.entityDef.routes.from);
     set(this.resource, 'spec.template.beans', this.beans?.parent.beans);
     return this.resource as unknown as IWorkflowDefinition;
   }
@@ -82,13 +82,13 @@ export class WorkflowResource extends CamelKResource implements RouteTemplateBea
   }
 
   createRouteTemplateBeansEntity(): RouteTemplateBeansEntity {
-    this.flow.workflow.spec.template.beans = [];
-    this.beans = new RouteTemplateBeansEntity(this.flow.workflow.spec.template as RouteTemplateBeansParentType);
+    this.flow.workflow.spec.routes.beans = [];
+    this.beans = new RouteTemplateBeansEntity(this.flow.workflow.spec.routes as RouteTemplateBeansParentType);
     return this.beans;
   }
 
   deleteRouteTemplateBeansEntity(): void {
-    this.flow.workflow.spec.template.beans = undefined;
+    this.flow.workflow.spec.routes.beans = undefined;
     this.beans = undefined;
   }
 }

@@ -54,7 +54,7 @@ export interface IKameletMetadataLabels {
 export interface IKameletSpec {
   definition: IKameletSpecDefinition;
   dependencies: string[];
-  template: {
+  routes: {
     beans?: BeanFactory[];
     from: FromDefinition;
   };

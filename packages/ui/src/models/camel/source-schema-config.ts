@@ -58,7 +58,7 @@ class SourceSchemaConfig {
     [SourceSchemaType.Workflow]: {
       name: 'Workflow',
       schema: undefined,
-      multipleRoute: false,
+      multipleRoute: true,
       description: 'Defines a reusable Workflow as a building block.',
     },
     [SourceSchemaType.WorkflowBinding]: {

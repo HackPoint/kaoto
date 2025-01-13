@@ -51,4 +51,11 @@ public class Constants {
         public static final String KAMELET_BOUNDARIES_FILENAME = "kamelet-boundaries";
         public static final String KAMELETS_AGGREGATE = "kamelets-aggregate";
 
+        // adding; workflow
+        public static final String WORKFLOW = "workflows";
+        public static final String WORKFLOW_BOUNDARIES_KEY = "workflowBoundaries";
+        public static final String WORKFLOW_BOUNDARIES_FILENAME = "workflow-boundaries";
+        public static final String WORKFLOWS_AGGREGATE = "workflow-aggregate";
+
+
 }

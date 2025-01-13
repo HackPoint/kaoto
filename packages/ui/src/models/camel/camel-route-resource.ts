@@ -90,7 +90,8 @@ export class CamelRouteResource implements CamelResource, BeansAwareResource {
   }
 
   addNewEntity(entityType?: EntityType): string {
-    if (entityType && entityType !== EntityType.Route) {
+    // if (entityType && entityType !== EntityType.Route) {
+    if (entityType) {
       const supportedEntity = CamelRouteResource.SUPPORTED_ENTITIES.find(({ type }) => type === entityType);
       if (supportedEntity) {
         const entity = new supportedEntity.Entity();

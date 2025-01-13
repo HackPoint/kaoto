@@ -16,14 +16,14 @@ import { getCustomSchemaFromWorkflow } from '../../../utils/get-custom-schema-fr
 
 export class WorkflowVisualEntity extends AbstractCamelVisualEntity<{
   id: string;
-  template: { from: FromDefinition };
+  routes: { from: FromDefinition };
 }> {
   id: string;
   readonly type = EntityType.Kamelet;
-  static readonly ROOT_PATH = 'template';
+  static readonly ROOT_PATH = 'routes';
 
   constructor(public workflow: IWorkflowDefinition) {
-    super({ id: workflow.metadata?.name, template: { from: workflow?.spec.template.from } });
+    super({ id: workflow.metadata?.name, routes: { from: workflow?.spec.routes.from } });
     this.id = (workflow?.metadata?.name as string) ?? getCamelRandomId('workflow');
     this.workflow.metadata = workflow?.metadata ?? { name: this.id };
     this.workflow.metadata.name = workflow?.metadata.name ?? this.id;
@@ -59,7 +59,7 @@ export class WorkflowVisualEntity extends AbstractCamelVisualEntity<{
   }
 
   toJSON(): { from: FromDefinition } {
-    return { from: this.entityDef.template.from };
+    return { from: this.entityDef.routes.from };
   }
 
   getComponentSchema(path?: string | undefined): VisualComponentSchema | undefined {
@@ -95,10 +95,10 @@ export class WorkflowVisualEntity extends AbstractCamelVisualEntity<{
     if (
       options.mode === AddStepMode.ReplaceStep &&
       options.data.path === `${this.getRootPath()}.from` &&
-      isDefined(this.entityDef.template.from)
+      isDefined(this.entityDef.routes.from)
     ) {
       const fromValue = CamelComponentDefaultService.getDefaultFromDefinitionValue(options.definedComponent);
-      Object.assign(this.entityDef.template.from, fromValue);
+      Object.assign(this.entityDef.routes.from, fromValue);
       return;
     }
 
@@ -127,7 +127,7 @@ export class WorkflowVisualEntity extends AbstractCamelVisualEntity<{
   }
 
   protected getRootUri(): string | undefined {
-    return this.workflow.spec.template.from?.uri;
+    return this.workflow.spec.routes.from?.uri;
   }
 
   private getRootKameletSchema(): KaotoSchemaDefinition['schema'] {
