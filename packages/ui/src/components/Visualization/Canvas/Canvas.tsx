@@ -90,8 +90,16 @@ export const Canvas: FunctionComponent<PropsWithChildren<CanvasProps>> = ({ enti
       },
     };
 
-    controller.fromModel(model, false);
-    setInitialized(true);
+    if (!initialized) {
+      controller.fromModel(model, false);
+      setInitialized(true);
+      return;
+    }
+
+    requestAnimationFrame(() => {
+      controller.fromModel(model, true);
+      controller.getGraph().layout();
+    });
   }, [controller, entities, visibleFlows]);
 
   const handleSelection = useCallback((selectedIds: string[]) => {
@@ -131,7 +139,7 @@ export const Canvas: FunctionComponent<PropsWithChildren<CanvasProps>> = ({ enti
         id: 'topology-control-bar-h_layout-button',
         icon: (
           <Icon>
-            <img src={layoutHorizontalIcon} />
+            <img src={layoutHorizontalIcon} alt="Horizontal Layout" />
           </Icon>
         ),
         tooltip: 'Horizontal Layout',
@@ -145,7 +153,7 @@ export const Canvas: FunctionComponent<PropsWithChildren<CanvasProps>> = ({ enti
         id: 'topology-control-bar-v_layout-button',
         icon: (
           <Icon>
-            <img src={layoutVerticalIcon} />
+            <img src={layoutVerticalIcon} alt="Vertical Layout" />
           </Icon>
         ),
         tooltip: 'Vertical Layout',

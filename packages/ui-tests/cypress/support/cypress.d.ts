@@ -38,6 +38,7 @@ declare global {
       toggleFlowsList(): Chainable<JQuery<Element>>;
       toggleRouteVisibility(index: number): Chainable<JQuery<Element>>;
       closeFlowsListIfVisible(): Chainable<JQuery<Element>>;
+      openFlowsListIfClosed(): Chainable<JQuery<Element>>;
       switchIntegrationType(type: string): Chainable<JQuery<Element>>;
       allignAllRoutesVisibility(switchvisibility: string): Chainable<JQuery<Element>>;
       hideAllRoutes(): Chainable<JQuery<Element>>;
@@ -45,6 +46,7 @@ declare global {
       // design
       openGroupConfigurationTab(step: string, stepIndex?: number): Chainable<JQuery<Element>>;
       openStepConfigurationTab(step: string, stepIndex?: number): Chainable<JQuery<Element>>;
+      openStepConfigurationTabByPath(path: string): Chainable<JQuery<Element>>;
       toggleExpandGroup(groupName: string): Chainable<JQuery<Element>>;
       fitToScreen(): Chainable<JQuery<Element>>;
       closeStepConfigurationTab(): Chainable<JQuery<Element>>;
@@ -61,7 +63,7 @@ declare global {
       selectRemoveGroup(groupName: string, nodeIndex?: number): Chainable<JQuery<Element>>;
       performNodeAction(nodeName: string, action: ActionType, nodeIndex?: number): Chainable<JQuery<Element>>;
       checkNodeExist(inputName: string, nodesCount: number): Chainable<JQuery<Element>>;
-      checkEdgeExists(sourceName: string, targetName: string): Chainable<JQuery<Element>>;
+      checkEdgeExists(scope: string, sourceName: string, targetName: string): Chainable<JQuery<Element>>;
       deleteBranch(branchIndex: number): Chainable<JQuery<Element>>;
       selectCamelRouteType(type: string, subType?: string): Chainable<JQuery<Element>>;
       selectRuntimeVersion(type: string): Chainable<JQuery<Element>>;

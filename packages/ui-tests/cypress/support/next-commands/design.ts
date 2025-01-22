@@ -7,6 +7,10 @@ Cypress.Commands.add('openStepConfigurationTab', (step: string, stepIndex?: numb
   cy.get(`g[data-nodelabel^="${step}"]`).eq(stepIndex).click({ force: true });
 });
 
+Cypress.Commands.add('openStepConfigurationTabByPath', (path: string) => {
+  cy.get(`g[data-testid="${path}"]`).click({ force: true });
+});
+
 Cypress.Commands.add('openGroupConfigurationTab', (group: string, groupIndex?: number) => {
   groupIndex = groupIndex ?? 0;
   cy.get(`g[data-grouplabel^="${group}"]`).eq(groupIndex).click({ force: true });
@@ -25,7 +29,7 @@ Cypress.Commands.add('closeStepConfigurationTab', () => {
 Cypress.Commands.add('removeNodeByName', (nodeName: string, nodeIndex?: number) => {
   cy.performNodeAction(nodeName, 'delete', nodeIndex);
   cy.get('body').then(($body) => {
-    if ($body.find('.pf-m-danger').length) {
+    if ($body.find('[data-testid="action-confirmation-modal-btn-confirm"]').length) {
       // Delete Confirmation Modal appeared, click on the confirm button
       cy.get('[data-testid="action-confirmation-modal-btn-confirm"]').click();
     }
@@ -105,8 +109,8 @@ Cypress.Commands.add('checkNodeExist', (inputName, nodesCount) => {
   cy.get(`foreignObject[data-nodelabel="${inputName}"]`).should('have.length', nodesCount);
 });
 
-Cypress.Commands.add('checkEdgeExists', (sourceName: string, targetName: string) => {
-  const idPattern = `${sourceName} >>> ${targetName}`;
+Cypress.Commands.add('checkEdgeExists', (scope: string, sourceName: string, targetName: string) => {
+  const idPattern = `${scope}|${sourceName} >>> ${targetName}`;
   // Check if an element with the matching id exists
   cy.get('g').should(($elements) => {
     // Use Cypress commands to check if any element matches the id pattern
@@ -128,19 +132,19 @@ Cypress.Commands.add('deleteBranch', (branchIndex) => {
 Cypress.Commands.add('selectCamelRouteType', (type: string, subType?: string) => {
   cy.get('[data-testid="new-entity-list-dropdown"]').click({ force: true });
   if (subType) {
-    cy.get('ul.pf-v5-c-menu__list')
+    cy.get('ul.pf-v6-c-menu__list')
       .should('exist')
       .find(`[data-testid="new-entity-${type}"]`)
       .should('exist')
       .trigger('mouseover');
   }
   subType = subType ?? type;
-  cy.get(`[data-testid="new-entity-${subType}"] button.pf-v5-c-menu__item`).click({ force: true });
+  cy.get(`[data-testid="new-entity-${subType}"] button.pf-v6-c-menu__item`).click({ force: true });
 });
 
 Cypress.Commands.add('selectRuntimeVersion', (type: string) => {
   cy.hoverOnRuntime(type);
-  cy.get(`[data-testid^="runtime-selector-Camel ${type}"] button.pf-v5-c-menu__item`).first().click({ force: true });
+  cy.get(`[data-testid^="runtime-selector-Camel ${type}"] button.pf-v6-c-menu__item`).first().click({ force: true });
   cy.waitSchemasLoading();
 
   cy.get('[data-testid="visualization-empty-state"]').should('exist');
@@ -149,7 +153,7 @@ Cypress.Commands.add('selectRuntimeVersion', (type: string) => {
 
 Cypress.Commands.add('hoverOnRuntime', (type: string) => {
   cy.get('[data-testid="runtime-selector-list-dropdown"]').click({ force: true });
-  cy.get('ul.pf-v5-c-menu__list')
+  cy.get('ul.pf-v6-c-menu__list')
     .should('exist')
     .find(`[data-testid="runtime-selector-${type}"]`)
     .should('exist')
@@ -157,9 +161,9 @@ Cypress.Commands.add('hoverOnRuntime', (type: string) => {
 });
 
 Cypress.Commands.add('checkCatalogVersion', (version?: string) => {
-  cy.get('.pf-v5-c-card__title-text')
+  cy.get('.pf-v6-c-card__title-text')
     .eq(0)
     .within(() => {
-      cy.get('.pf-v5-c-label__text').should('contain', version);
+      cy.get('.pf-v6-c-label__text').should('contain', version);
     });
 });
