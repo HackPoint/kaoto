@@ -131,7 +131,7 @@ export class WorkflowVisualEntity extends AbstractCamelVisualEntity<{
   }
 
   private getRootKameletSchema(): KaotoSchemaDefinition['schema'] {
-    const rootWorkflowDefinition = CamelCatalogService.getComponent(CatalogKind.Entity, 'WorkflowConfiguration');
+    const rootWorkflowDefinition = CamelCatalogService.getComponent(CatalogKind.Entity, 'Workflow');
 
     if (rootWorkflowDefinition === undefined) return {} as unknown as KaotoSchemaDefinition['schema'];
 
